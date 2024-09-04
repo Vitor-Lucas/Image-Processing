@@ -10,3 +10,4 @@ C:\Tec_info\C# Forms\Image-Processing\Image Processing\obj\Debug\Image Processin
 C:\Tec_info\C# Forms\Image-Processing\Image Processing\obj\Debug\Image Processing.exe
 C:\Tec_info\C# Forms\Image-Processing\Image Processing\obj\Debug\Image Processing.pdb
 C:\Tec_info\C# Forms\Image-Processing\Image processing\obj\Debug\Image_Processing.Form2.resources
+C:\Tec_info\C# Forms\Image-Processing\Image processing\obj\Debug\Image_Processing.Form3.resources

@@ -64,7 +64,7 @@ namespace Image_Processing
 
         private void button1_Click(object sender, EventArgs e)
         {
-            pictureBox1.Image.Save(image_path);
+            //pictureBox1.Image.Save(image_path);
         }
     }
 }
