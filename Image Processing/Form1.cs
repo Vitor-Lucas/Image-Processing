@@ -24,6 +24,15 @@ namespace Image_Processing
             return Math.Min(Math.Max(current, min), max);
         }
 
+        private int ConvertGrayScale(int R, int G, int B)
+        {
+            return (int)((R * 0.3) + (G * 0.59) + (B * 0.11));
+        }
+        private Color CriarCor(int r, int g, int b)
+        {
+            return Color.FromArgb(r, g, b);
+        }
+
         private Bitmap SetBrightness(Bitmap image, int b)
         {
             int width = image.Width;
@@ -42,12 +51,11 @@ namespace Image_Processing
                     G = clamp(G + b, 0, 255);
                     B = clamp(B + b, 0,255);
 
-                    new_image.SetPixel(i, j, Color.FromArgb(R, G, B));
+                    new_image.SetPixel(i, j, CriarCor(R,G,B));
                 }
             }
             return new_image;
         }
-
 
         private Bitmap GrayScale(Bitmap image)
         {
@@ -63,8 +71,9 @@ namespace Image_Processing
                     int G = image.GetPixel(i, j).G;
                     int B = image.GetPixel(i, j).B;
 
-                    int gray = (int)((R * 0.3) + (G * 0.59) + (B * 0.11));
-                    new_image.SetPixel(i, j, Color.FromArgb(gray, gray, gray));
+                    int gray = ConvertGrayScale(R, G, B);
+
+                    new_image.SetPixel(i, j, CriarCor(gray, gray, gray));
                 }
             }
             return new_image;
@@ -130,24 +139,15 @@ namespace Image_Processing
                 {
                     int I = image.GetPixel(i, j).R;
 
-
                     if (I <= t)
                         I = 0;
                     else
                         I = 255;
-
                     
-                    new_image.SetPixel(i, j, Color.FromArgb(I,I,I));
+                    new_image.SetPixel(i, j, CriarCor(I,I,I));
                 }
             }
             return new_image;
-        }
-
-
-
-        private void Form1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -161,11 +161,6 @@ namespace Image_Processing
             pictureBox6.Image = main_image;
             pictureBox3.Image = plane_image;
             pictureBox8.Image = man_image;
-        }
-
-        private void pictureBox3_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void pictureBox6_Click(object sender, EventArgs e)
@@ -203,15 +198,15 @@ namespace Image_Processing
 
         private void Gerar_button_Click(object sender, EventArgs e)
         {
+            // Junta as imagens
             Bitmap joined_image = main_image;
-            
             joined_image = PlaceImage(joined_image, man_image, Color.FromArgb(166, 144, 107), 700, 600);
             joined_image = PlaceImage(joined_image, baloon_image, Color.FromArgb(82, 141, 201), 700, 45);
             joined_image = PlaceImage(joined_image, plane_image, Color.FromArgb(63, 146, 214), 60, 100);
 
             pictureBox5.Image = joined_image;
 
-
+            //Salva as imagens
             joined_image.Save(@"C:\Images\Foto_Unida.jpg");
             GrayScale(joined_image).Save(@"C:\Images\GrayScale.jpg");
             Threshold(joined_image, 126).Save(@"C:\Images\Binária.jpg");
@@ -241,6 +236,8 @@ namespace Image_Processing
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+            if (textBox1.Text == "")
+                return;
             trackBar1.Value = int.Parse(textBox1.Text);
         }
     }
