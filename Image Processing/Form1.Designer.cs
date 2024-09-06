@@ -56,12 +56,13 @@
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox5.TabIndex = 4;
             this.pictureBox5.TabStop = false;
-            this.pictureBox5.Click += new System.EventHandler(this.pictureBox5_Click);
             // 
             // Gerar_button
             // 
-            this.Gerar_button.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.Gerar_button.Location = new System.Drawing.Point(942, 272);
+            this.Gerar_button.BackColor = System.Drawing.Color.Lavender;
+            this.Gerar_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Gerar_button.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.Gerar_button.Location = new System.Drawing.Point(948, 343);
             this.Gerar_button.Name = "Gerar_button";
             this.Gerar_button.Size = new System.Drawing.Size(95, 43);
             this.Gerar_button.TabIndex = 5;
@@ -79,14 +80,14 @@
             this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox8.TabIndex = 3;
             this.pictureBox8.TabStop = false;
-            this.pictureBox8.Click += new System.EventHandler(this.pictureBox8_Click);
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button1.BackColor = System.Drawing.Color.Lavender;
             this.button1.Enabled = false;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button1.Location = new System.Drawing.Point(942, 344);
+            this.button1.Location = new System.Drawing.Point(948, 422);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(95, 43);
             this.button1.TabIndex = 6;
@@ -99,13 +100,12 @@
             this.pictureBox6.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox6.BackColor = System.Drawing.Color.White;
             this.pictureBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox6.Location = new System.Drawing.Point(64, 26);
+            this.pictureBox6.Location = new System.Drawing.Point(65, 26);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(217, 155);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox6.TabIndex = 0;
             this.pictureBox6.TabStop = false;
-            this.pictureBox6.Click += new System.EventHandler(this.pictureBox6_Click);
             // 
             // pictureBox1
             // 
@@ -117,7 +117,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // pictureBox3
             // 
@@ -129,7 +128,6 @@
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 2;
             this.pictureBox3.TabStop = false;
-            this.pictureBox3.Click += new System.EventHandler(this.pictureBox7_Click);
             // 
             // trackBar1
             // 
@@ -153,9 +151,12 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(768, 193);
+            this.textBox1.BackColor = System.Drawing.Color.LightGray;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Location = new System.Drawing.Point(768, 196);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(34, 26);
+            this.textBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.textBox1.Size = new System.Drawing.Size(34, 19);
             this.textBox1.TabIndex = 9;
             this.textBox1.Text = "85";
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);

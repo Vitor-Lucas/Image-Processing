@@ -19,7 +19,7 @@ namespace Image_Processing
 
         private void Form3_Load(object sender, EventArgs e)
         {
-
+            pictureBox1.Image = new Bitmap(@"C:\Images\Foto_Unida.jpg");
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)

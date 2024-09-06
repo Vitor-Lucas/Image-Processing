@@ -36,6 +36,7 @@
             // comboBox1
             // 
             this.comboBox1.BackColor = System.Drawing.Color.White;
+            this.comboBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "Original",
@@ -47,6 +48,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(220, 28);
             this.comboBox1.TabIndex = 7;
+            this.comboBox1.Text = "Original";
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // pictureBox1

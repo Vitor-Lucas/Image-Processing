@@ -13,13 +13,12 @@ namespace Image_Processing
         Bitmap man_image;
         Bitmap new_image;
 
-        bool image_generated;
         public Form1()
         {
             InitializeComponent();
         }
 
-        private int clamp(int current, int min, int max)
+        private int Clamp(int current, int min, int max)
         {
             return Math.Min(Math.Max(current, min), max);
         }
@@ -28,6 +27,7 @@ namespace Image_Processing
         {
             return (int)((R * 0.3) + (G * 0.59) + (B * 0.11));
         }
+
         private Color CriarCor(int r, int g, int b)
         {
             return Color.FromArgb(r, g, b);
@@ -47,9 +47,9 @@ namespace Image_Processing
                     int G = image.GetPixel(i, j).G;
                     int B = image.GetPixel(i, j).B;
 
-                    R = clamp(R + b, 0, 255);
-                    G = clamp(G + b, 0, 255);
-                    B = clamp(B + b, 0,255);
+                    R = Clamp(R + b, 0, 255);
+                    G = Clamp(G + b, 0, 255);
+                    B = Clamp(B + b, 0,255);
 
                     new_image.SetPixel(i, j, CriarCor(R,G,B));
                 }
@@ -163,41 +163,11 @@ namespace Image_Processing
             pictureBox8.Image = man_image;
         }
 
-        private void pictureBox6_Click(object sender, EventArgs e)
-        {
-            Form2 form = new Form2(@"C:\Images\Im.jpg");
-            form.ShowDialog();
-        }
-
-        private void pictureBox8_Click(object sender, EventArgs e)
-        {
-            Form2 form = new Form2(@"C:\Images\homem.jpg");
-            form.ShowDialog();
-        }
-
-        private void pictureBox7_Click(object sender, EventArgs e)
-        {
-            Form2 form = new Form2(@"C:\Images\Aviao2.jpg");
-            form.ShowDialog();
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-            Form2 form = new Form2(@"C:\Images\Balao.jpg");
-            form.ShowDialog();
-        }
-
-        private void pictureBox5_Click(object sender, EventArgs e)
-        {
-            if (!image_generated)
-                return;
-
-            Form2 form = new Form2(@"C:\Images\Foto_Unida.jpg");
-            form.ShowDialog();
-        }
-
         private void Gerar_button_Click(object sender, EventArgs e)
         {
+            pictureBox5.Image = null;
+            pictureBox5.Refresh();
+
             // Junta as imagens
             Bitmap joined_image = main_image;
             joined_image = PlaceImage(joined_image, man_image, Color.FromArgb(166, 144, 107), 700, 600);
@@ -213,7 +183,6 @@ namespace Image_Processing
             SetBrightness(joined_image, trackBar1.Value).Save(@"C:\Images\Brilho.jpg");
             Rotate(joined_image).Save(@"C:\Images\Rotacionada.jpg");
 
-            image_generated = true;
             button1.Enabled = true;
             MessageBox.Show("Imagens Geradas com sucesso!\n verifique no diretório: C:\\Images\\");
         }
@@ -222,11 +191,6 @@ namespace Image_Processing
         {
             Form3 form = new Form3();
             form.ShowDialog();
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
