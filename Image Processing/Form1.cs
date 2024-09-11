@@ -1,7 +1,17 @@
-﻿using System;
+﻿/*
+ * Colegio Técnico Antônio Teixeira Fernandes (Univap)
+ *Curso Técnico em Informática - Data de Entrega: 09 / 09 / 2024
+ * Autores do Projeto: Vitor Lucas Kohls Correa
+ *                     Isabelly Pacheco Marinho
+ *
+ * Turma: 3F
+ * 
+ * 
+ * ******************************************************************/
+using System;
 using System.Drawing;
 using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
+
 
 namespace Image_Processing
 {
@@ -11,7 +21,6 @@ namespace Image_Processing
         Bitmap main_image;
         Bitmap plane_image;
         Bitmap man_image;
-        Bitmap new_image;
 
         public Form1()
         {
@@ -31,6 +40,19 @@ namespace Image_Processing
         private Color CriarCor(int r, int g, int b)
         {
             return Color.FromArgb(r, g, b);
+        }
+
+        private bool InRange(Color cur_color, Color other_color, int tolerance)
+        {
+            int cur_R = cur_color.R;
+            int cur_G = cur_color.G;
+            int cur_B = cur_color.B;
+
+            int dist_R = Math.Abs(cur_R - other_color.R);
+            int dist_G = Math.Abs(cur_G - other_color.G);
+            int dist_B = Math.Abs(cur_B - other_color.B);
+
+            return (dist_R <= tolerance && dist_B <= tolerance && dist_G <= tolerance);
         }
 
         private Bitmap SetBrightness(Bitmap image, int b)
@@ -79,7 +101,7 @@ namespace Image_Processing
             return new_image;
         }
 
-        private Bitmap PlaceImage(Bitmap bigger_img, Bitmap smaller_img, Color background, int x, int y)
+        private Bitmap PlaceImage(Bitmap bigger_img, Bitmap smaller_img, Color background, int x, int y, int background_tolerance)
         {
             int width = bigger_img.Width;
             int height = bigger_img.Height;
@@ -90,24 +112,11 @@ namespace Image_Processing
                 for (int j = 0; j < smaller_img.Height; j++)
                 {
                     Color pixel = smaller_img.GetPixel(i, j);
-                    if (!InRange(pixel, background, 20))
+                    if (!InRange(pixel, background, background_tolerance))
                         result.SetPixel(i+x, j+y, pixel);
                 }
             }
             return result;
-        }
-
-        private bool InRange(Color cur_color, Color other_color, int tolerance)
-        {
-            int cur_R = cur_color.R;
-            int cur_G = cur_color.G;
-            int cur_B = cur_color.B;
-
-            int dist_R = Math.Abs(cur_R - other_color.R);
-            int dist_G = Math.Abs(cur_G - other_color.G);
-            int dist_B = Math.Abs(cur_B - other_color.B);
-
-            return (dist_R <= tolerance && dist_B <= tolerance && dist_G <= tolerance);
         }
 
         private Bitmap Rotate(Bitmap image)
@@ -130,6 +139,8 @@ namespace Image_Processing
         {
             int width = image.Width;
             int height = image.Height;
+
+            image = GrayScale(image);
 
             Bitmap new_image = new Bitmap(width, height);
             
@@ -165,15 +176,12 @@ namespace Image_Processing
 
         private void Gerar_button_Click(object sender, EventArgs e)
         {
-            pictureBox5.Image = null;
-            pictureBox5.Refresh();
-
             // Junta as imagens
             Bitmap joined_image = main_image;
-            joined_image = PlaceImage(joined_image, man_image, Color.FromArgb(166, 144, 107), 700, 600);
-            joined_image = PlaceImage(joined_image, baloon_image, Color.FromArgb(82, 141, 201), 700, 45);
-            joined_image = PlaceImage(joined_image, plane_image, Color.FromArgb(63, 146, 214), 60, 100);
-
+            joined_image = PlaceImage(joined_image, man_image, CriarCor(166, 144, 107), 700, 600, 20);
+            joined_image = PlaceImage(joined_image, baloon_image, CriarCor(82, 141, 201), 700, 45, 20);
+            joined_image = PlaceImage(joined_image, plane_image, CriarCor(63, 146, 214), 60, 100, 20);
+            
             pictureBox5.Image = joined_image;
 
             //Salva as imagens
@@ -184,6 +192,7 @@ namespace Image_Processing
             Rotate(joined_image).Save(@"C:\Images\Rotacionada.jpg");
 
             button1.Enabled = true;
+            Gerar_button.Enabled = false;
             MessageBox.Show("Imagens Geradas com sucesso!\n verifique no diretório: C:\\Images\\");
         }
 
